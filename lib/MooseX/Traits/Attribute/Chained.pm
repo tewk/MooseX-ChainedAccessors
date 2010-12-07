@@ -2,7 +2,7 @@ package MooseX::Traits::Attribute::Chained;
 use Moose::Role;
 use MooseX::ChainedAccessors::Accessor;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub accessor_metaclass { 'MooseX::ChainedAccessors::Accessor' }
 

@@ -4,14 +4,11 @@ use warnings;
 
 use base 'Moose::Meta::Method::Accessor';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub _generate_accessor_method_inline {
     my $self        = $_[0];
-    my $attr        = $self->associated_attribute;
-    my $attr_name   = $attr->name;
     my $inv         = '$_[0]';
-    my $slot_access = $self->_inline_access($inv, $attr_name);
     my $value_name  = $self->_value_needs_copy ? '$val' : '$_[1]';
 
     $self->_eval_code('sub { ' . "\n"
@@ -33,10 +30,7 @@ sub _generate_accessor_method_inline {
 
 sub _generate_writer_method_inline {
     my $self        = $_[0];
-    my $attr        = $self->associated_attribute;
-    my $attr_name   = $attr->name;
     my $inv         = '$_[0]';
-    my $slot_access = $self->_inline_get($inv, $attr_name);
     my $value_name  = $self->_value_needs_copy ? '$val' : '$_[1]';
 
     $self->_eval_code('sub { '
